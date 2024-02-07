@@ -28,4 +28,5 @@ async def submit_form(request: Request):
     else:
         return "Already registered bot"
 
-uvicorn.run(app,port=8000)
+if __name__ == "__main__":
+    uvicorn.run(app,port=8000)
