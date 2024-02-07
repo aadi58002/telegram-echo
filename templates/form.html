@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>FastAPI Form</title>
+</head>
+<body>
+    <h1> Telegram Echo Bot</h1>
+    <p> Where to get the token?</p><br/>
+    <p>1. Go to <a href="https://telegram.me/BotFather">Telegram BotFather</a> and register a bot</p><br/>
+    <p>2. The bot will have a token</p><br/>
+    <p>3. Paste that token below</p><br/>
+    <h2>Enter a String</h2>
+    <form>
+        <label for="input_text">Token Input:</label>
+        <input type="text" id="input_text" name="input_text" required>
+        <button type="button" onclick="submitForm()">Submit</button>
+    </form>
+    <div id="result"></div>
+    <script>
+        async function submitForm() {
+            const input_text = document.getElementById('input_text').value;
+            const resultDiv = document.getElementById('result');
+
+            try {
+                const response = await fetch('/submit/', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ input_text }),
+                });
+
+                const data = await response.json();
+                resultDiv.innerText = `Result: ${data}`;
+            } catch (error) {
+                console.error('Error submitting form:', error);
+                resultDiv.innerText = 'An error occurred.';
+            }
+        }
+    </script>
+</body>
+</html>
+
